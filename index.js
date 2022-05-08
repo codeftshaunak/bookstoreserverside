@@ -19,6 +19,9 @@ const client = new MongoClient(uri, {
         useUnifiedTopology: true,
         serverApi: ServerApiVersion.v1
 });
+
+
+
 async function run() {
         try {
                 await client.connect();
@@ -28,6 +31,13 @@ async function run() {
                         const cursor = booksCollection.find(query);
                         const books = await cursor.toArray();
                         res.send(books);
+                })
+
+                app.post('/additems', async (req, res) => {
+                        const newData = req.body;
+                        console.log('add newdata', newData);
+                        const result = await booksCollection.insertOne(newData)
+                        res.send(result)
                 })
         } finally {
 
