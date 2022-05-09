@@ -54,7 +54,26 @@ async function run() {
                         res.send(result)
                 })
 
-                
+
+                //Update Restock
+                app.put('/booksdetail/:booksid', async (req, res) => {
+                        const booksid = req.params.booksid;
+                        const data = req.body;
+                        const filter = {
+                                _id: ObjectId(booksid)
+                        }
+                        const options = {
+                                upsert: true
+                        }
+                        const updateDoc = {
+                                $set: {
+                                        quantity: data.quantity
+                                },
+                        }
+
+                        const result = await booksCollection.updateOne(filter, options, updateDoc)
+                        res.send(result)
+                })
         } finally {
 
         }
