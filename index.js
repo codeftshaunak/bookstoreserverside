@@ -40,7 +40,7 @@ async function run() {
                 app.get('/booksdetail/:booksid', async (req, res) => {
                         const booksid = req.params.booksid;
                         const query = {
-                                _id: ObjectId
+                                _id: ObjectId(booksid)
                         };
                         const books = await booksCollection.findOne(query);
                         res.send(books)
