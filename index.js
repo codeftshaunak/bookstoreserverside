@@ -67,7 +67,7 @@ async function run() {
                         }
                         const updateDoc = {
                                 $set: {
-                                        quantity: updateProduct.currQuantityInt
+                                        quantity: updateProduct.result
                                 }
                         }
                         const result = await booksCollection.updateOne(filter, updateDoc, options)
