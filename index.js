@@ -74,6 +74,16 @@ async function run() {
                         res.send(result)
                 })
 
+                //Delete Product From DB
+                app.delete('/booksdetail/:booksid', async (req, res) => {
+                        const booksid = req.params.booksid;
+                        const query = {
+                                _id: ObjectId(booksid)
+                        }
+                        const result = await booksCollection.deleteOne(query)
+                        res.send(result)
+                })
+
         } finally {
 
         }
