@@ -36,6 +36,16 @@ async function run() {
                         res.send(books);
                 })
 
+                app.get('/myitems', async (req, res) => {
+                        const email = req.query.email;
+                        const query = {
+                                email: email
+                        }
+                        const cursor = booksCollection.find(query)
+                        const myItems = await cursor.toArray();
+                        res.send(myItems);
+                })
+
                 //Get one data by id
                 app.get('/booksdetail/:booksid', async (req, res) => {
                         const booksid = req.params.booksid;
